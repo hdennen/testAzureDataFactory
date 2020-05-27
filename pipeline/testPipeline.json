@@ -1,5 +1,5 @@
 {
-	"name": "pipeline1",
+	"name": "testPipeline",
 	"properties": {
 		"activities": [
 			{
@@ -118,6 +118,26 @@
 						"type": "DatasetReference"
 					}
 				]
+			},
+			{
+				"name": "testValidation",
+				"type": "Validation",
+				"dependsOn": [],
+				"userProperties": [
+					{
+						"name": "TEst",
+						"value": "myValue"
+					}
+				],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "Json2",
+						"type": "DatasetReference"
+					},
+					"timeout": "7.00:00:00",
+					"sleep": 10,
+					"childItems": true
+				}
 			}
 		],
 		"annotations": []
