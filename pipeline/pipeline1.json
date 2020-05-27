@@ -40,52 +40,82 @@
 						"mappings": [
 							{
 								"source": {
-									"path": "$['product']['id']"
-								}
-							},
-							{
-								"source": {
-									"path": "$['product']['Name']"
-								}
-							},
-							{
-								"source": {
 									"path": "['id']"
+								},
+								"sink": {
+									"path": "components_id"
 								}
 							},
 							{
 								"source": {
 									"path": "['name']"
+								},
+								"sink": {
+									"path": "components_name"
 								}
 							},
 							{
 								"source": {
 									"path": "['isDeprecated']"
+								},
+								"sink": {
+									"path": "components_isDeprecated"
 								}
 							},
 							{
 								"source": {
 									"path": "['type']"
+								},
+								"sink": {
+									"path": "components_type"
 								}
 							},
 							{
 								"source": {
 									"path": "['dependencies'][0]['type']"
+								},
+								"sink": {
+									"path": "dependencies_type"
 								}
 							},
 							{
 								"source": {
 									"path": "['dependencies'][0]['name']"
+								},
+								"sink": {
+									"path": "dependencies_name"
 								}
 							},
 							{
 								"source": {
 									"path": "['dependencies'][0]['version']"
+								},
+								"sink": {
+									"path": "dependencies_version"
+								}
+							},
+							{
+								"source": {
+									"path": "$['product']['id']"
+								},
+								"sink": {
+									"path": "product_id"
+								}
+							},
+							{
+								"source": {
+									"path": "$['product']['Name']"
+								},
+								"sink": {
+									"path": "product_name"
 								}
 							},
 							{
 								"source": {
 									"path": "$['authoritative-branch']"
+								},
+								"sink": {
+									"path": "authoritative-branch"
 								}
 							}
 						],
