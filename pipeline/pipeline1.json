@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Copy data1",
+				"name": "flatMapCopy",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -30,7 +30,8 @@
 						},
 						"formatSettings": {
 							"type": "JsonWriteSettings",
-							"quoteAllText": true
+							"quoteAllText": true,
+							"filePattern": "arrayOfObjects"
 						}
 					},
 					"enableStaging": false,
@@ -39,7 +40,52 @@
 						"mappings": [
 							{
 								"source": {
-									"path": "$['Column_1']"
+									"path": "$['product']['id']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['product']['Name']"
+								}
+							},
+							{
+								"source": {
+									"path": "['id']"
+								}
+							},
+							{
+								"source": {
+									"path": "['name']"
+								}
+							},
+							{
+								"source": {
+									"path": "['isDeprecated']"
+								}
+							},
+							{
+								"source": {
+									"path": "['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "['dependencies'][0]['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "['dependencies'][0]['name']"
+								}
+							},
+							{
+								"source": {
+									"path": "['dependencies'][0]['version']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['authoritative-branch']"
 								}
 							}
 						],
@@ -54,7 +100,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "atomjson",
+						"referenceName": "Json2",
 						"type": "DatasetReference"
 					}
 				]
