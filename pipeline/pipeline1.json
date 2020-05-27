@@ -22,9 +22,37 @@
 							"recursive": true
 						}
 					},
-					"enableStaging": false
+					"sink": {
+						"type": "JsonSink",
+						"storeSettings": {
+							"type": "AzureBlobStorageWriteSettings",
+							"copyBehavior": "FlattenHierarchy"
+						},
+						"formatSettings": {
+							"type": "JsonWriteSettings",
+							"quoteAllText": true
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"path": "$['Column_1']"
+								}
+							}
+						],
+						"collectionReference": "$['components']"
+					}
 				},
 				"inputs": [
+					{
+						"referenceName": "atomjson",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
 					{
 						"referenceName": "atomjson",
 						"type": "DatasetReference"
