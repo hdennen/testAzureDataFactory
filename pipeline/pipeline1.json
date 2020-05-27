@@ -72,26 +72,10 @@
 							},
 							{
 								"source": {
-									"path": "['dependencies'][0]['type']"
+									"path": "['dependencies']"
 								},
 								"sink": {
-									"path": "dependencies_type"
-								}
-							},
-							{
-								"source": {
-									"path": "['dependencies'][0]['name']"
-								},
-								"sink": {
-									"path": "dependencies_name"
-								}
-							},
-							{
-								"source": {
-									"path": "['dependencies'][0]['version']"
-								},
-								"sink": {
-									"path": "dependencies_version"
+									"path": "dependencies"
 								}
 							},
 							{
