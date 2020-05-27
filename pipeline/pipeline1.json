@@ -15,8 +15,21 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
+					"source": {
+						"type": "JsonSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true
+						}
+					},
 					"enableStaging": false
-				}
+				},
+				"inputs": [
+					{
+						"referenceName": "atomjson",
+						"type": "DatasetReference"
+					}
+				]
 			}
 		],
 		"annotations": []
