@@ -7,14 +7,14 @@
 				"type": "Copy",
 				"dependsOn": [
 					{
-						"activity": "Check files exist",
+						"activity": "Source files exist",
 						"dependencyConditions": [
 							"Succeeded"
 						]
 					}
 				],
 				"policy": {
-					"timeout": "7.00:00:00",
+					"timeout": "0.00:00:30",
 					"retry": 0,
 					"retryIntervalInSeconds": 30,
 					"secureOutput": false,
@@ -38,7 +38,7 @@
 						"formatSettings": {
 							"type": "JsonWriteSettings",
 							"quoteAllText": true,
-							"filePattern": "setOfObjects"
+							"filePattern": "arrayOfObjects"
 						}
 					},
 					"enableStaging": false,
@@ -50,7 +50,7 @@
 									"path": "['id']"
 								},
 								"sink": {
-									"path": "components_id"
+									"path": "component_id"
 								}
 							},
 							{
@@ -58,7 +58,7 @@
 									"path": "['name']"
 								},
 								"sink": {
-									"path": "components_name"
+									"path": "component_name"
 								}
 							},
 							{
@@ -66,7 +66,7 @@
 									"path": "['isDeprecated']"
 								},
 								"sink": {
-									"path": "components_isDeprecated"
+									"path": "component_isDeprecated"
 								}
 							},
 							{
@@ -74,7 +74,7 @@
 									"path": "['type']"
 								},
 								"sink": {
-									"path": "components_type"
+									"path": "component_type"
 								}
 							},
 							{
@@ -127,7 +127,7 @@
 				]
 			},
 			{
-				"name": "Check files exist",
+				"name": "Source files exist",
 				"type": "Validation",
 				"dependsOn": [],
 				"userProperties": [
@@ -141,7 +141,7 @@
 						"referenceName": "atomjson",
 						"type": "DatasetReference"
 					},
-					"timeout": "7.00:00:00",
+					"timeout": "0.00:00:20",
 					"sleep": 10
 				}
 			}
