@@ -5,7 +5,14 @@
 			{
 				"name": "flatMapCopy",
 				"type": "Copy",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "Check files exist",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "7.00:00:00",
 					"retry": 0,
@@ -114,13 +121,13 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "Json2",
+						"referenceName": "atomsFlattened",
 						"type": "DatasetReference"
 					}
 				]
 			},
 			{
-				"name": "testValidation",
+				"name": "Check files exist",
 				"type": "Validation",
 				"dependsOn": [],
 				"userProperties": [
@@ -131,7 +138,7 @@
 				],
 				"typeProperties": {
 					"dataset": {
-						"referenceName": "Json2",
+						"referenceName": "atomsFlattened",
 						"type": "DatasetReference"
 					},
 					"timeout": "7.00:00:00",
