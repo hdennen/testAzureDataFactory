@@ -1,6 +1,10 @@
 {
 	"name": "AtomsTransformed",
 	"properties": {
+		"linkedServiceName": {
+			"referenceName": "localODBC",
+			"type": "LinkedServiceReference"
+		},
 		"annotations": [],
 		"type": "OdbcTable",
 		"schema": []
