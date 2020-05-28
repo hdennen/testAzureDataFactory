@@ -1,0 +1,8 @@
+{
+	"name": "AtomsTransformed",
+	"properties": {
+		"annotations": [],
+		"type": "OdbcTable",
+		"schema": []
+	}
+}
