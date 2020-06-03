@@ -28,8 +28,12 @@
 					"name": "sink1"
 				}
 			],
-			"transformations": [],
-			"script": "source(output(\n\t\tcomponents_id as string,\n\t\tcomponents_name as string,\n\t\tcomponents_isDeprecated as string,\n\t\tcomponents_type as string,\n\t\tdependencies as (type as string, name as string, version as string)[],\n\t\tproduct_id as string,\n\t\tproduct_name as string,\n\t\t{authoritative-branch} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: true,\n\tinferDriftedColumnTypes: true,\n\tsingleDocument: true) ~> atomsAugmented\nsource(allowSchemaDrift: true,\n\tvalidateSchema: false) ~> source1\natomsAugmented sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> sink1"
+			"transformations": [
+				{
+					"name": "Flatten1"
+				}
+			],
+			"script": "source(output(\n\t\tcomponents_id as string,\n\t\tcomponents_name as string,\n\t\tcomponents_isDeprecated as string,\n\t\tcomponents_type as string,\n\t\tdependencies as (type as string, name as string, version as string)[],\n\t\tproduct_id as string,\n\t\tproduct_name as string,\n\t\t{authoritative-branch} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: true,\n\tinferDriftedColumnTypes: true,\n\tsingleDocument: true) ~> atomsAugmented\nsource(output(\n\t\t{authoritative-branch} as string,\n\t\tcomponent_id as string,\n\t\tcomponent_isDeprecated as boolean,\n\t\tcomponent_name as string,\n\t\tcomponent_type as string,\n\t\tdependencies as (name as string, type as string, version as string)[],\n\t\tproduct_hasAppFullInstall as boolean,\n\t\tproduct_hasDatabaseFullInstall as boolean,\n\t\tproduct_hasValidatedAppFullInstall as boolean,\n\t\tproduct_hasValidatedDatabaseFullInstall as boolean,\n\t\tproduct_id as string,\n\t\tproduct_name as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> source1\nsource1 foldDown(skipDuplicateMapInputs: false,\n\tskipDuplicateMapOutputs: false) ~> Flatten1\natomsAugmented sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> sink1"
 		}
 	}
 }
