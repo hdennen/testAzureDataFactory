@@ -7,7 +7,7 @@
 				"type": "Copy",
 				"dependsOn": [
 					{
-						"activity": "Source files exist",
+						"activity": "New Atoms exist",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -35,8 +35,7 @@
 					"sink": {
 						"type": "JsonSink",
 						"storeSettings": {
-							"type": "AzureBlobStorageWriteSettings",
-							"copyBehavior": "FlattenHierarchy"
+							"type": "AzureBlobStorageWriteSettings"
 						},
 						"formatSettings": {
 							"type": "JsonWriteSettings",
@@ -130,7 +129,7 @@
 				]
 			},
 			{
-				"name": "Source files exist",
+				"name": "New Atoms exist",
 				"type": "Validation",
 				"dependsOn": [],
 				"userProperties": [
@@ -157,6 +156,12 @@
 						"dependencyConditions": [
 							"Succeeded"
 						]
+					},
+					{
+						"activity": "api atoms exist",
+						"dependencyConditions": [
+							"Succeeded"
+						]
 					}
 				],
 				"policy": {
@@ -176,6 +181,188 @@
 						"coreCount": 8,
 						"computeType": "General"
 					}
+				}
+			},
+			{
+				"name": "Get atoms from api",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.00:01:41",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [
+					{
+						"name": "Source",
+						"value": "api/GetDummyAtoms"
+					},
+					{
+						"name": "Destination",
+						"value": "atoms-from-api//"
+					}
+				],
+				"typeProperties": {
+					"source": {
+						"type": "RestSource",
+						"httpRequestTimeout": "00:01:40",
+						"requestInterval": "00.00:00:00.010",
+						"requestMethod": "GET"
+					},
+					"sink": {
+						"type": "JsonSink",
+						"storeSettings": {
+							"type": "AzureBlobStorageWriteSettings"
+						},
+						"formatSettings": {
+							"type": "JsonWriteSettings",
+							"quoteAllText": true
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"path": "$['product']['id']"
+								},
+								"sink": {
+									"path": "product_id"
+								}
+							},
+							{
+								"source": {
+									"path": "$['product']['name']"
+								},
+								"sink": {
+									"path": "product_name"
+								}
+							},
+							{
+								"source": {
+									"path": "$['product']['hasAppFullInstall']"
+								},
+								"sink": {
+									"path": "product_hasAppFullInstall"
+								}
+							},
+							{
+								"source": {
+									"path": "$['product']['hasDatabaseFullInstall']"
+								},
+								"sink": {
+									"path": "product_hasDatabaseFullInstall"
+								}
+							},
+							{
+								"source": {
+									"path": "$['product']['hasValidatedAppFullInstall']"
+								},
+								"sink": {
+									"path": "product_hasValidatedAppFullInstall"
+								}
+							},
+							{
+								"source": {
+									"path": "$['product']['hasValidatedDatabaseFullInstall']"
+								},
+								"sink": {
+									"path": "product_hasValidatedDatabaseFullInstall"
+								}
+							},
+							{
+								"source": {
+									"path": "['id']"
+								},
+								"sink": {
+									"path": "component_id"
+								}
+							},
+							{
+								"source": {
+									"path": "['name']"
+								},
+								"sink": {
+									"path": "component_name"
+								}
+							},
+							{
+								"source": {
+									"path": "['isDeprecated']"
+								},
+								"sink": {
+									"path": "component_isDeprecated"
+								}
+							},
+							{
+								"source": {
+									"path": "['type']"
+								},
+								"sink": {
+									"path": "component_type"
+								}
+							},
+							{
+								"source": {
+									"path": "['dependencies']"
+								},
+								"sink": {
+									"path": "dependencies"
+								}
+							},
+							{
+								"source": {
+									"path": "$['authoritative-branch']"
+								},
+								"sink": {
+									"path": "authoritative-branch"
+								}
+							}
+						],
+						"collectionReference": "$['components']"
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "DummyAtomsAPI",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "AtomsFromAPI",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "api atoms exist",
+				"type": "Validation",
+				"dependsOn": [
+					{
+						"activity": "Get atoms from api",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [
+					{
+						"name": "TEst",
+						"value": "myValue"
+					}
+				],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "AtomsFromAPI",
+						"type": "DatasetReference"
+					},
+					"timeout": "0.00:00:20",
+					"sleep": 10,
+					"childItems": true
 				}
 			}
 		],

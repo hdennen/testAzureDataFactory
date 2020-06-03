@@ -12,12 +12,24 @@
 					"name": "flatAtoms"
 				},
 				{
+					"dataset": {
+						"referenceName": "AtomsFromAPI",
+						"type": "DatasetReference"
+					},
 					"name": "source1"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "Avro1",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
 			"transformations": [],
-			"script": "source(output(\n\t\tcomponents_id as string,\n\t\tcomponents_name as string,\n\t\tcomponents_isDeprecated as string,\n\t\tcomponents_type as string,\n\t\tdependencies as (type as string, name as string, version as string)[],\n\t\tproduct_id as string,\n\t\tproduct_name as string,\n\t\t{authoritative-branch} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: true,\n\tinferDriftedColumnTypes: true,\n\tsingleDocument: true) ~> atomsAugmented\nsource(allowSchemaDrift: true,\n\tvalidateSchema: false) ~> source1"
+			"script": "source(output(\n\t\tcomponents_id as string,\n\t\tcomponents_name as string,\n\t\tcomponents_isDeprecated as string,\n\t\tcomponents_type as string,\n\t\tdependencies as (type as string, name as string, version as string)[],\n\t\tproduct_id as string,\n\t\tproduct_name as string,\n\t\t{authoritative-branch} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: true,\n\tinferDriftedColumnTypes: true,\n\tsingleDocument: true) ~> atomsAugmented\nsource(allowSchemaDrift: true,\n\tvalidateSchema: false) ~> source1\natomsAugmented sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> sink1"
 		}
 	}
 }
