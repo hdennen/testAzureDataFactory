@@ -1,0 +1,12 @@
+{
+	"name": "DummyAtomsAPI",
+	"properties": {
+		"annotations": [],
+		"type": "RestService",
+		"typeProperties": {
+			"url": "https://datafactoryatomstest.azurewebsites.net/api/GetDummyAtoms",
+			"enableServerCertificateValidation": true,
+			"authenticationType": "Anonymous"
+		}
+	}
+}
