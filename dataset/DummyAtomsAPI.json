@@ -1,5 +1,5 @@
 {
-	"name": "RestResource1",
+	"name": "DummyAtomsAPI",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "DummyAtomsAPI",
