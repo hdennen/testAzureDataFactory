@@ -4,7 +4,7 @@
 		"annotations": [],
 		"type": "RestService",
 		"typeProperties": {
-			"url": "https://datafactoryatomstest.azurewebsites.net/api/GetDummyAtoms",
+			"url": "https://datafactoryatomstest.azurewebsites.net",
 			"enableServerCertificateValidation": true,
 			"authenticationType": "Anonymous"
 		}
