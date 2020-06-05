@@ -6,7 +6,7 @@
 		"pipelines": [],
 		"type": "BlobEventsTrigger",
 		"typeProperties": {
-			"blobPathBeginsWith": "/component-atoms/blobs/data_49c",
+			"blobPathBeginsWith": "/component-atoms/blobs/",
 			"blobPathEndsWith": ".json",
 			"ignoreEmptyBlobs": true,
 			"scope": "/subscriptions/7140eece-918d-476b-8042-65d5ecdefcdb/resourceGroups/Atom.Test/providers/Microsoft.Storage/storageAccounts/atomblobs",
