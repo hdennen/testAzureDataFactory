@@ -365,7 +365,7 @@
 						"type": "JsonSink",
 						"storeSettings": {
 							"type": "AzureBlobStorageWriteSettings",
-							"copyBehavior": "MergeFiles"
+							"copyBehavior": "FlattenHierarchy"
 						},
 						"formatSettings": {
 							"type": "JsonWriteSettings",
@@ -379,47 +379,7 @@
 						"mappings": [
 							{
 								"source": {
-									"path": "['id']"
-								},
-								"sink": {
-									"path": "component_id"
-								}
-							},
-							{
-								"source": {
-									"path": "['name']"
-								},
-								"sink": {
-									"path": "component_name"
-								}
-							},
-							{
-								"source": {
-									"path": "['isDeprecated']"
-								},
-								"sink": {
-									"path": "component_isDeprecated"
-								}
-							},
-							{
-								"source": {
-									"path": "['type']"
-								},
-								"sink": {
-									"path": "component_type"
-								}
-							},
-							{
-								"source": {
-									"path": "['dependencies']"
-								},
-								"sink": {
-									"path": "dependencies"
-								}
-							},
-							{
-								"source": {
-									"path": "$['product']['id']"
+									"path": "$['product_id']"
 								},
 								"sink": {
 									"path": "product_id"
@@ -427,7 +387,7 @@
 							},
 							{
 								"source": {
-									"path": "$['product']['Name']"
+									"path": "$['product_name']"
 								},
 								"sink": {
 									"path": "product_name"
@@ -435,14 +395,46 @@
 							},
 							{
 								"source": {
-									"path": "$['authoritative-branch']"
+									"path": "$['component_id']"
 								},
 								"sink": {
-									"path": "authoritative-branch"
+									"path": "component_id"
+								}
+							},
+							{
+								"source": {
+									"path": "$['component_name']"
+								},
+								"sink": {
+									"path": "component_name"
+								}
+							},
+							{
+								"source": {
+									"path": "['type']"
+								},
+								"sink": {
+									"path": "dependency_type"
+								}
+							},
+							{
+								"source": {
+									"path": "['name']"
+								},
+								"sink": {
+									"path": "dependency_name"
+								}
+							},
+							{
+								"source": {
+									"path": "['version']"
+								},
+								"sink": {
+									"path": "dependency_version"
 								}
 							}
 						],
-						"collectionReference": "$['components']"
+						"collectionReference": "$['dependencies']"
 					}
 				},
 				"inputs": [
