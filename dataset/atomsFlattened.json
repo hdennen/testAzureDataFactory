@@ -17,16 +17,16 @@
 		"schema": {
 			"type": "object",
 			"properties": {
-				"components_id": {
+				"component_id": {
 					"type": "string"
 				},
-				"components_name": {
+				"component_name": {
 					"type": "string"
 				},
-				"components_isDeprecated": {
-					"type": "integer"
+				"component_isDeprecated": {
+					"type": "boolean"
 				},
-				"components_type": {
+				"component_type": {
 					"type": "string"
 				},
 				"dependencies": {
@@ -47,12 +47,6 @@
 					}
 				},
 				"product_id": {
-					"type": "string"
-				},
-				"product_name": {
-					"type": "string"
-				},
-				"authoritative-branch": {
 					"type": "string"
 				}
 			}
