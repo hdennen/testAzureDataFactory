@@ -7,7 +7,7 @@
 				"type": "WebActivity",
 				"dependsOn": [
 					{
-						"activity": "GenerateCypherQuery",
+						"activity": "BuildCypherQuery",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -22,47 +22,15 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"url": "http://40.113.94.165:7474/tx/commit",
+					"url": "http://40.113.94.165:7474/db/neo4j/tx/commit",
 					"method": "POST",
 					"headers": {
 						"Authorization": "Basic bmVvNGo6dGVzdA=="
 					},
 					"body": {
-						"value": "@activity('GenerateCypherQuery').output",
+						"value": "@activity('BuildCypherQuery').output",
 						"type": "Expression"
 					}
-				}
-			},
-			{
-				"name": "GenerateCypherQuery",
-				"type": "AzureFunctionActivity",
-				"dependsOn": [
-					{
-						"activity": "Lookup1",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "0.00:03:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"functionName": "AtomFileCypher",
-					"method": "POST",
-					"body": {
-						"value": "@activity('Lookup1').output.value",
-						"type": "Expression"
-					}
-				},
-				"linkedServiceName": {
-					"referenceName": "VinceCypherMaker",
-					"type": "LinkedServiceReference"
 				}
 			},
 			{
@@ -516,6 +484,34 @@
 						"type": "DatasetReference"
 					},
 					"firstRowOnly": false
+				}
+			},
+			{
+				"name": "BuildCypherQuery",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "Lookup1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.00:02:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": "https://generateatomfilecypher.azurewebsites.net/api/AtomFileCypher?code=yQxHDhkGo7ZyYOVT9YqxzT6H/1YTaXgHp30PWAj8atKbMUtKaMuw5Q==",
+					"method": "POST",
+					"body": {
+						"value": "@activity('Lookup1').output.value",
+						"type": "Expression"
+					}
 				}
 			}
 		],
