@@ -13,7 +13,7 @@
 		],
 		"type": "BlobEventsTrigger",
 		"typeProperties": {
-			"blobPathBeginsWith": "/component-atoms/blobs/",
+			"blobPathBeginsWith": "/temp/blobs/",
 			"blobPathEndsWith": ".json",
 			"ignoreEmptyBlobs": true,
 			"scope": "/subscriptions/7140eece-918d-476b-8042-65d5ecdefcdb/resourceGroups/Atom.Test/providers/Microsoft.Storage/storageAccounts/atomblobs",
