@@ -1,0 +1,27 @@
+{
+	"name": "dataflow1",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "atomjson",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				},
+				{
+					"dataset": {
+						"referenceName": "atomjson",
+						"type": "DatasetReference"
+					},
+					"name": "source2"
+				}
+			],
+			"sinks": [],
+			"transformations": [],
+			"script": "source(output(\n\t\tproduct as (id as string, Name as string),\n\t\tcomponents as (id as string, name as string, isDeprecated as string, type as string, dependencies as (type as string, name as string, version as string)[])[],\n\t\t{authoritative-branch} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tsingleDocument: true,\n\tunquotedColumnNames: true,\n\tbackslashEscape: true) ~> source1\nsource(output(\n\t\tproduct as (id as string, Name as string),\n\t\tcomponents as (id as string, name as string, isDeprecated as string, type as string, dependencies as (type as string, name as string, version as string)[])[],\n\t\t{authoritative-branch} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> source2"
+		}
+	}
+}
