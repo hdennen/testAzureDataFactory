@@ -12,6 +12,74 @@
 				"type": "AzureBlobStorageLocation",
 				"container": "temp"
 			}
+		},
+		"schema": {
+			"type": "object",
+			"properties": {
+				"product": {
+					"type": "object",
+					"properties": {
+						"id": {
+							"type": "string"
+						},
+						"name": {
+							"type": "string"
+						},
+						"hasAppFullInstall": {
+							"type": "boolean"
+						},
+						"hasDatabaseFullInstall": {
+							"type": "boolean"
+						},
+						"hasValidatedAppFullInstall": {
+							"type": "boolean"
+						},
+						"hasValidatedDatabaseFullInstall": {
+							"type": "boolean"
+						}
+					}
+				},
+				"components": {
+					"type": "array",
+					"items": {
+						"type": "object",
+						"properties": {
+							"id": {
+								"type": "string"
+							},
+							"name": {
+								"type": "string"
+							},
+							"isDeprecated": {
+								"type": "boolean"
+							},
+							"type": {
+								"type": "string"
+							},
+							"dependencies": {
+								"type": "array",
+								"items": {
+									"type": "object",
+									"properties": {
+										"type": {
+											"type": "string"
+										},
+										"name": {
+											"type": "string"
+										},
+										"version": {
+											"type": "string"
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"authoritativeBranch": {
+					"type": "string"
+				}
+			}
 		}
 	}
 }
