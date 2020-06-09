@@ -6,7 +6,7 @@
 			"sources": [
 				{
 					"dataset": {
-						"referenceName": "atomjson",
+						"referenceName": "atomsFlattened",
 						"type": "DatasetReference"
 					},
 					"name": "source1"
@@ -20,8 +20,12 @@
 				}
 			],
 			"sinks": [],
-			"transformations": [],
-			"script": "source(output(\n\t\tproduct as (id as string, Name as string),\n\t\tcomponents as (id as string, name as string, isDeprecated as string, type as string, dependencies as (type as string, name as string, version as string)[])[],\n\t\t{authoritative-branch} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tsingleDocument: true,\n\tunquotedColumnNames: true,\n\tbackslashEscape: true) ~> source1\nsource(output(\n\t\tproduct as (id as string, Name as string),\n\t\tcomponents as (id as string, name as string, isDeprecated as string, type as string, dependencies as (type as string, name as string, version as string)[])[],\n\t\t{authoritative-branch} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> source2"
+			"transformations": [
+				{
+					"name": "Filter1"
+				}
+			],
+			"script": "source(output(\n\t\tcomponents_id as string,\n\t\tcomponents_name as string,\n\t\tcomponents_isDeprecated as string,\n\t\tcomponents_type as string,\n\t\tdependencies as (type as string, name as string, version as string)[],\n\t\tproduct_id as string,\n\t\tproduct_name as string,\n\t\t{authoritative-branch} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tlimit: 10,\n\tsingleDocument: true) ~> source1\nsource(output(\n\t\tproduct as (id as string, Name as string),\n\t\tcomponents as (id as string, name as string, isDeprecated as string, type as string, dependencies as (type as string, name as string, version as string)[])[],\n\t\t{authoritative-branch} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> source2\nsource1 filter(ERROR_FUNCTION('')) ~> Filter1"
 		}
 	}
 }
