@@ -1,0 +1,28 @@
+{
+	"name": "dataflow1",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "atomjson",
+						"type": "DatasetReference"
+					},
+					"name": "rawAtom"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "temp",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [],
+			"script": "source(output(\n\t\tproduct as (id as string, name as string, hasAppFullInstall as boolean, hasDatabaseFullInstall as boolean, hasValidatedAppFullInstall as boolean, hasValidatedDatabaseFullInstall as boolean),\n\t\tcomponents as (id as string, name as string, isDeprecated as boolean, type as string, dependencies as (type as string, name as string, version as string)[])[],\n\t\tauthoritativeBranch as string\n\t),\n\tallowSchemaDrift: false,\n\tvalidateSchema: false,\n\tlimit: 10,\n\tsingleDocument: true) ~> rawAtom\nrawAtom sink(input(\n\t\tproduct as (id as string, name as string, hasAppFullInstall as boolean, hasDatabaseFullInstall as boolean, hasValidatedAppFullInstall as boolean, hasValidatedDatabaseFullInstall as boolean),\n\t\tcomponents as (id as string, name as string, isDeprecated as boolean, type as string, dependencies as (type as string, name as string, version as string)[])[],\n\t\tauthoritativeBranch as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\ttruncate: true) ~> sink1"
+		}
+	}
+}

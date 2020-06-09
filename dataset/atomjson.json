@@ -23,8 +23,20 @@
 						"id": {
 							"type": "string"
 						},
-						"Name": {
+						"name": {
 							"type": "string"
+						},
+						"hasAppFullInstall": {
+							"type": "boolean"
+						},
+						"hasDatabaseFullInstall": {
+							"type": "boolean"
+						},
+						"hasValidatedAppFullInstall": {
+							"type": "boolean"
+						},
+						"hasValidatedDatabaseFullInstall": {
+							"type": "boolean"
 						}
 					}
 				},
@@ -40,7 +52,7 @@
 								"type": "string"
 							},
 							"isDeprecated": {
-								"type": "integer"
+								"type": "boolean"
 							},
 							"type": {
 								"type": "string"
@@ -65,7 +77,7 @@
 						}
 					}
 				},
-				"authoritative-branch": {
+				"authoritativeBranch": {
 					"type": "string"
 				}
 			}
