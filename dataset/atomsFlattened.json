@@ -10,6 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
+				"fileName": "atom.json",
 				"container": "atoms-tranformed"
 			}
 		},
