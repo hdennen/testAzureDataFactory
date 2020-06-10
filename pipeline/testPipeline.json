@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "CloudVMNeo4j",
+				"name": "LocalVMNeo4j",
 				"type": "WebActivity",
 				"dependsOn": [
 					{
@@ -22,7 +22,11 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"url": "http://40.113.94.165:7474/db/neo4j/tx/commit",
+					"url": "http://localhost:7474/db/neo4j/tx/commit",
+					"connectVia": {
+						"referenceName": "integrationRuntime1",
+						"type": "IntegrationRuntimeReference"
+					},
 					"method": "POST",
 					"headers": {
 						"Authorization": "Basic bmVvNGo6dGVzdA=="
@@ -421,7 +425,7 @@
 				"type": "Delete",
 				"dependsOn": [
 					{
-						"activity": "CloudVMNeo4j",
+						"activity": "LocalVMNeo4j",
 						"dependencyConditions": [
 							"Succeeded"
 						]
